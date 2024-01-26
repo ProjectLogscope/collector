@@ -1,0 +1,67 @@
+basePath: /
+definitions:
+  definition.Log:
+    properties:
+      commit:
+        type: string
+      level:
+        type: string
+      message:
+        type: string
+      metadata:
+        properties:
+          parentResourceId:
+            type: string
+        type: object
+      resourceId:
+        type: string
+      spanId:
+        type: string
+      timestamp:
+        type: string
+      traceId:
+        type: string
+    required:
+    - commit
+    - level
+    - message
+    - metadata
+    - resourceId
+    - spanId
+    - timestamp
+    - traceId
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: hardeepnarang10@gmail.com
+    name: Hardeep Narang
+  description: Collector API for Log Ingestor Service
+  license:
+    name: GPLv3
+  title: Log Ingestor - Collector
+  version: v1.0
+paths:
+  /:
+    post:
+      consumes:
+      - application/json
+      description: Insert a new log record
+      parameters:
+      - description: Log collect parameters
+        in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/definition.Log'
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      summary: Insert log message
+      tags:
+      - Collect
+schemes:
+- http
+swagger: "2.0"

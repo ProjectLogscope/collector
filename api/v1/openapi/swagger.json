@@ -1,0 +1,99 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Collector API for Log Ingestor Service",
+        "title": "Log Ingestor - Collector",
+        "contact": {
+            "name": "Hardeep Narang",
+            "email": "hardeepnarang10@gmail.com"
+        },
+        "license": {
+            "name": "GPLv3"
+        },
+        "version": "v1.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "post": {
+                "description": "Insert a new log record",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "Collect"
+                ],
+                "summary": "Insert log message",
+                "parameters": [
+                    {
+                        "description": "Log collect parameters",
+                        "name": "filter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/definition.Log"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "definition.Log": {
+            "type": "object",
+            "required": [
+                "commit",
+                "level",
+                "message",
+                "metadata",
+                "resourceId",
+                "spanId",
+                "timestamp",
+                "traceId"
+            ],
+            "properties": {
+                "commit": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "parentResourceId": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "resourceId": {
+                    "type": "string"
+                },
+                "spanId": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "traceId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
